@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+body{
+    background: rgb(189, 52, 52);
+}
+div{
+    background:rgb(79, 248, 212);
+    border-radius: 10px;
+    width: 400px;
+    margin: 20px;
+    text-align: center;
+    padding: 10px;
+}
+a{
+    text-decoration: none;
+}
+button{
+    padding: 5px;
+    border-radius: 3px;
+}
+</style>
+
+<center>
+    <h1 style="background: linear-gradient(135deg,rgb(219, 151, 151),rgb(137, 221, 137));">
+        CART
+    </h1>
+</center>
+
+{% if cart_items %}
+    {% for item in cart_items %}
+        <div style="background-color: rgb(152, 222, 224);">
+            <h3>{{ item.product.name }}</h3>
+            <img src="{{ item.product.image.url }}" width="200" height="200">
+            <p>{{ item.product.price }}</p>
+            <p>Quantity: {{ item.quantity }}</p>
+            <p>Total: {{ item.total }}</p>
+
+            <button style="background-color: aquamarine;">
+                <a href="{% url 'increase' item.product.id %}" style="color: tomato;">➕</a>
+            </button>
+
+            <button style="background-color: rgb(34, 175, 29);">
+                <a href="{% url 'decrease' item.product.id %}">➖</a>
+            </button>
+
+            <button style="background-color: rgb(220, 230, 226);">
+                <a href="{% url 'remove' item.product.id %}">Remove</a>
+            </button>
+        </div>
+    {% endfor %}
+
+    <a href="{% url 'checkout' %}">
+        <button style="background-color: #28a745; color: white; padding: 10px 20px; border-radius: 5px; border: none; margin-top: 10px; cursor: pointer;">
+            Proceed to Checkout
+        </button>
+    </a>
+{% else %}
+    <p>Cart is empty!</p>
+{% endif %}
+
+<a href="{% url 'product_list' %}" style="color: aliceblue;">
+    Continue shopping...
+</a>
+
+{% endblock %}

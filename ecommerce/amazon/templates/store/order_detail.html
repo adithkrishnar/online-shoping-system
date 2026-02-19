@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+</head>
+<body>
+    <center>
+        <div>
+            <h1>ORDER DETAILS</h1>
+            <p>Order ID : {{ order.id }}</p>
+
+            <p>
+                <strong>STATUS: </strong>
+                {% if order.status == 'delivered' %}green
+                {% elsif order.status == 'shipped' %}orange
+                {% else %}red
+                {% endif %}
+                {{ order.status }}
+
+            </p>
+            <p>
+                <strong>PAYMENT: </strong>
+                {% if order.status == 'PAID' %}green
+                {% elsif order.status == 'FAILED' %}orange
+                {% else %}orange
+                {% endif %}
+                {{ order.status }}
+
+            </p>
+            <h3>ITEMS ORDERED</h3>
+            {% for item in order.items.all %}
+            <div>
+                {{item.product.name}}
+                {{item.quantity}}
+                {{item.product.price}}
+            </div>
+            {% endfor %}
+        <hr> 
+        <h3>TOTAL AMOUNT: {{ order.total_amount }}</h3>   
+        </div>
+    </center>
+</body>
+</html>

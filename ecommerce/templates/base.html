@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ecommerce</title>
+</head>
+<style>
+    .navi{
+        background-color: rgb(226, 108, 108);
+        border-radius: 5px;
+        padding: 3px;
+        margin:10px;
+        color:white;
+    }
+
+</style>
+<body>
+    <nav>
+        <a class="navi" href="{% url 'product_list' %}">HOME</a>
+
+        {% if user.is_authenticated %}
+            Welcome {{ user.username }}
+            <a class="navi" href="{% url 'view_cart' %}">cart</a>
+            <a class="navi" href="{% url 'logout' %}">logout</a>
+        {% else %}
+            <a class="navi" href="{% url 'login' %}">login</a>
+            <a  class="navi" href="{% url 'register' %}">register</a>
+        {% endif %}
+    </nav>
+
+    <hr>
+
+    {% block content %}
+    {% endblock content %}
+</body>
+</html>
